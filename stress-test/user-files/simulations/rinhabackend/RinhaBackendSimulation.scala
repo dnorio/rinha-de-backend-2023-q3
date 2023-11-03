@@ -56,21 +56,52 @@ class RinhaBackendSimulation
     )
 
   setUp(
+    // original test
+    //criacaoEConsultaPessoas.inject(
+    //  constantUsersPerSec(2).during(10.seconds), // warm up
+    //  constantUsersPerSec(5).during(15.seconds), // are you ready?
+    //  
+    //  rampUsersPerSec(6).to(250).during(3.minutes) // lezzz go!!!
+    //),
+    //buscaPessoas.inject(
+    //  constantUsersPerSec(2).during(25.seconds), // warm up
+    //  
+    //  rampUsersPerSec(6).to(100).during(3.minutes) // lezzz go!!!
+    //),
+    //buscaInvalidaPessoas.inject(
+    //  constantUsersPerSec(2).during(25.seconds), // warm up
+//
+    //  rampUsersPerSec(6).to(40).during(3.minutes) // lezzz go!!!
+    //)
+
     criacaoEConsultaPessoas.inject(
-      constantUsersPerSec(2).during(10.seconds), // warm up
-      constantUsersPerSec(5).during(15.seconds).randomized, // are you ready?
-      
-      rampUsersPerSec(6).to(600).during(3.minutes) // lezzz go!!!
+      rampUsersPerSec(0).to(400).during(30.seconds),
+      constantUsersPerSec(400).during(150.seconds)
     ),
     buscaPessoas.inject(
-      constantUsersPerSec(2).during(25.seconds), // warm up
-      
-      rampUsersPerSec(6).to(100).during(3.minutes) // lezzz go!!!
+      rampUsersPerSec(0).to(150).during(30.seconds),
+      constantUsersPerSec(150).during(150.seconds)
     ),
-    buscaInvalidaPessoas.inject(
-      constantUsersPerSec(2).during(25.seconds), // warm up
-      
-      rampUsersPerSec(6).to(40).during(3.minutes) // lezzz go!!!
+    buscaInvalidaPessoas.inject(     
+      rampUsersPerSec(0).to(150).during(30.seconds),
+      constantUsersPerSec(150).during(150.seconds)
     )
+
+    // 12k cc
+    // criacaoEConsultaPessoas.inject(
+    //   rampUsersPerSec(0).to(3200).during(30.seconds),
+    //   constantUsersPerSec(3200).during(1.minutes),
+    //   rampUsersPerSec(3200).to(4200).during(90.seconds)
+    // ),
+    // buscaPessoas.inject(
+    //   rampUsersPerSec(0).to(3200).during(30.seconds),
+    //   constantUsersPerSec(3200).during(1.minutes),
+    //   rampUsersPerSec(3200).to(4200).during(90.seconds)
+    // ),
+    // buscaInvalidaPessoas.inject(     
+    //   rampUsersPerSec(0).to(3200).during(30.seconds),
+    //   constantUsersPerSec(3200).during(1.minutes),
+    //   rampUsersPerSec(3200).to(4200).during(90.seconds)
+    // )
   ).protocols(httpProtocol)
 }
